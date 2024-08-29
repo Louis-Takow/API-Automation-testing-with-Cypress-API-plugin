@@ -43,15 +43,15 @@ This automation assessment focuses on validating booking operations for both pos
 •	Sends a POST request to initiate a new booking.
 •	Confirms that the response status is 200.
 •	Logs the response and saves the booking ID in myBookingId.
-# Reading a Booking:
+### Reading a Booking:
 •	Sends a GET request to fetch booking details using the stored booking ID.
 •	Confirms that the response status is 200.
 •	Logs the booking details and iterates through each key-value pair for detailed logging.
-# Updating a Booking:
+### Updating a Booking:
 •	Sends a PUT request to modify the booking details using the stored booking ID.
 •	Confirms that the response status is 200.
 •	Logs the updated booking details and iterates through each key-value pair for detailed logging.
-# Deleting a Booking:
+### Deleting a Booking:
 •	Sends a DELETE request to remove the booking using the stored booking ID.
 •	Confirms that the response status is 201.
 
