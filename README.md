@@ -68,7 +68,7 @@ This automation assessment focuses on validating booking operations for both pos
 •	**Response Validation:** Ensures that each API response is verified for correct status codes and data consistency.
 •	**Data Management:** Separate test data from script by creating a base-URL global variable in the Cypress.config.js file. This helps in reusability of test data throughout the script
 •	**Validate Positive and Negative Path:** Testing valid, invalid and unexpected conditions.
-•  **Generation of Test report after Execution**: To integrate the Mochawesome report which is most compatible with Cypress to generate a report after test run to detaily display test outcome.
+•  **Generation of Test report after Execution**: To integrate the Mochawesome report which is most compatible with Cypress to generate a report after test run to display test outcome in detail.
 
 
 
