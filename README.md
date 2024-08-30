@@ -9,25 +9,26 @@ This project focuses on developing automated API tests using Cypress.io. For add
 
 ## Setup Instructions
 
-1. **Clone this repository** using your preferred command line tool or Git Bash.
-2. Navigate to the project directory after cloning by executing cd API Automation GOZEM in your terminal or PowerShell.
+1. **Clone this repository** using your preferred command line tool.
+2. Navigate to the project directory after cloning by executing cd GOZEM-Technical-Assessment in your terminal or PowerShell.
    
-''' PowerShell
+''' command line terminal
 Copy code
 git clone <repository-url>
-cd API Automation GOZEM
+cd GOZEM-Technical-Assessment
 
 3.	Install all necessary dependencies and Cypress by running the following commands:
 
-''' PowerShell
+''' command line terminal
 Copy code
 npm install
 npx cypress install
 npx cypress open
 
-4.	To run test and open Mochawesome report
+4.	Run test and open Mochawesome report using the following command:
 
-''' PowerShell
+''' command line terminal
+Copy code
 npm run cypress: run
 
 ## Running the Tests
@@ -67,10 +68,7 @@ This automation assessment focuses on validating booking operations for both pos
 •	**Response Validation:** Ensures that each API response is verified for correct status codes and data consistency.
 •	**Data Management:** Separate test data from script by creating a base-URL global variable in the Cypress.config.js file. This helps in reusability of test data throughout the script
 •	**Validate Positive and Negative Path:** Testing valid, invalid and unexpected conditions.
-•  **Generation of Test report after Execution**: It integrates the Mochawesome report which is most compatible with Cypress to generate a report after test run to detaily display test outcome . Use command:
-
-''' PowerShell
-npm run cypress: run
+•  **Generation of Test report after Execution**: It integrates the Mochawesome report which is most compatible with Cypress to generate a report after test run to detaily display test outcome.
 
 
 
