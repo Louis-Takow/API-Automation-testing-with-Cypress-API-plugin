@@ -96,7 +96,7 @@ describe('API Test Script', () => {
 
     it('should delete the created booking', () => {
       bookingPage.deleteBooking(apiToken, myBookingId).then((response) => {
-        expect(response.status).to.equal(201);  // Verify the response status is 201 (Created)
+        expect(response.status).to.equal(201);  // Verify the response status is 201
       });
     });
 
@@ -104,43 +104,68 @@ describe('API Test Script', () => {
 
   // Negative Test Cases
   context('Negative Test Cases', () => {
-
     it('should not create a booking with missing fields', () => {
-        const incompleteBookingDetails = {
-            // Missing required fields like firstname, lastname, and bookingdates
-            totalprice: 500,
-            depositpaid: true
-        };
-            cy.log('Response Status:', '400');  // Log the response status 
-    });
-
+      cy.request({
+        method: 'POST',
+        url: '/booking',
+        body: {
+          totalprice: 500,
+          depositpaid: true
+        },
+        failOnStatusCode: false
+      }).then((response) => {
+        expect(response.status).to.eq(500); // Verify the response status is 500
+      });
+    });    
+  
     it('should not retrieve a booking with an invalid ID', () => {
-        const invalidBookingId = 999999;  // Ensure this ID does not exist
-
-        cy.log('Response Status:', '404');  // Log the response status
+      cy.request({
+        method: 'GET',
+        url: '/booking/999999',
+        failOnStatusCode: false
+      }).then((response) => {
+        expect(response.status).to.eq(404); // Verify the response status is 404
+      });
     });
-
+  
     it('should not update a booking with an invalid token', () => {
-        const invalidToken = "invalidToken123";  // Invalid token
-        const updatedDetails = {
-            firstname: "Jane",
-            lastname: "Doe",
-            totalprice: 500,
-            depositpaid: true,
-            bookingdates: {
-                checkin: "2024-08-01",
-                checkout: "2024-08-02"
-            },
-            additionalneeds: "groceries"
-        };
-            cy.log('Response Status:', '403');  // Log the response status
+      cy.request({
+        method: 'PUT',
+        url: '/booking/792',
+        headers: {
+          'x-api-key': 'invalidToken123',
+          'Authorization': 'Basic YWRtaW46cGFzc3dvcmQxMjM=',
+        },
+        body: {
+          firstname: 'Jane',
+          lastname: 'Doe',
+          totalprice: 500,
+          depositpaid: true,
+          bookingdates: {
+            checkin: '2024-08-01',
+            checkout: '2024-08-02'
+          },
+          additionalneeds: 'groceries'
+        },
+        failOnStatusCode: false
+      }).then((response) => {
+        expect(response.status).to.eq(405); // Verify the response status is 405
+      });
     });
-
+    
     it('should not delete a booking with an invalid token', () => {
-        const invalidToken = "invalidToken123";  // Invalid token
-
-        cy.log('Response Status:', '403');  // Log the response status
-    });
-
+      cy.request({
+        method: 'DELETE',
+        url: '/booking/792',
+        headers: {
+          'x-api-key': 'invalidToken123', 
+          'Authorization': 'Basic YWRtaW46cGFzc3dvcmQxMjM=',
+        },
+        failOnStatusCode: false
+      }).then((response) => {
+        expect(response.status).to.eq(405); // Verify the response status is 405
+      });
+    });    
   });
+  
 });
