@@ -41,6 +41,20 @@ class BookingPage {
         body: updatedDetails  // The updated booking details to be sent in the request body
       });
     }
+
+   // Method to update an existing booking using a PATCH request for partial updates
+   partialyUpdateBooking(apiToken, bookingId, updatedDetails) {
+     return cy.request({
+       method: 'PATCH',  // specifies the HTTP method as PATCH for partial updates
+       url: '/booking/' + bookingId,  // API endpoint with booking ID for updating a specific booking
+       headers: {
+         'Content-Type': 'application/json',  // Content type for the request payload
+         'Accept': 'application/json',  // Accepting JSON in the response
+         'Cookie': 'token=' + apiToken  // Authorization using a token in the Cookie header
+       },
+       body: updatedDetails  // The partial updated booking details to be sent in the request body
+     });
+   }
   
     // Method to delete a specific booking using a DELETE request
     deleteBooking(apiToken, bookingId) {

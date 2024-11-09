@@ -68,9 +68,9 @@ describe('API Test Script', () => {
     it('should update the booking details', () => {
       const updatedDetails = {  // Define the updated booking details
         firstname: "Jane",
-        lastname: "Deo",
-        totalprice: 500,
-        depositpaid: true,
+        lastname: "Doll",
+        totalprice: 2500,
+        depositpaid: false,
         bookingdates: {
           checkin: "1999-04-15",
           checkout: "1999-04-15"
@@ -94,6 +94,27 @@ describe('API Test Script', () => {
       });
     });
 
+    it('should partially update the booking details', () => {
+      const updatedDetails = {  // Define the updated partial booking details
+        firstname: "James",
+        lastname: "Brown",
+      };
+
+      bookingPage.partialyUpdateBooking(apiToken, myBookingId, updatedDetails).then((response) => {
+        expect(response.status).to.equal(200);  // Verify the response status is 200 (OK)
+        cy.log('Updated Booking Details:', response.body);  // Log the updated booking details for debugging purposes
+
+        Object.entries(response.body).forEach(([key, value]) => {
+          if (typeof value === 'object' && value !== null) {
+            Object.entries(value).forEach(([subKey, subValue]) => {
+              cy.log(`${subKey}: ${subValue}`);
+            });
+          } else {
+            cy.log(`${key}: ${value}`);
+          }
+        });
+      });
+    });
     it('should delete the created booking', () => {
       bookingPage.deleteBooking(apiToken, myBookingId).then((response) => {
         expect(response.status).to.equal(201);  // Verify the response status is 201
@@ -146,6 +167,24 @@ describe('API Test Script', () => {
             checkout: '2024-08-02'
           },
           additionalneeds: 'groceries'
+        },
+        failOnStatusCode: false
+      }).then((response) => {
+        expect(response.status).to.eq(405); // Verify the response status is 405
+      });
+    });
+
+    it('should not partially update a booking with invalid token', () => {
+      cy.request({
+        method: 'PATCH',
+        url: '/booking/792',
+        headers: {
+          'x-api-key': 'invalidToken123',
+          'Authorization': 'Basic YWRtaW46cGFzc3dvcmQxMjM=',
+        },
+        body: {
+          firstname: 'Johnny',
+          totalprice: 700,
         },
         failOnStatusCode: false
       }).then((response) => {
