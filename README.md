@@ -1,4 +1,4 @@
-# API Automation GOZEM
+# API Automation
 
 This project focuses on developing automated API tests using Cypress.io. For additional details about Cypress, visit [Cypress.io](https://www.cypress.io).
 
@@ -15,7 +15,7 @@ This project focuses on developing automated API tests using Cypress.io. For add
 ''' command line terminal
 Copy code
 git clone <repository-url>
-cd GOZEM-Technical-Assessment
+cd API-Automation-testing-with-Cypress-API-plugin
 
 3.	Install all necessary dependencies and Cypress by running the following commands:
 
